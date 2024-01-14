@@ -1,0 +1,39 @@
+{% extends 'navbar.html' %}
+{% block title_block %} {{title}} {% endblock %}
+
+{% block body_block%}
+
+    {% if search %}
+        <h3>Search matched {{result|length}} results</h3>
+        <div class="row row-cols-2 row-cols-md-4">
+            {% for video in result %}
+                <div class="col my-2">
+                    <div class="card h-100 shadow pb-2 mb-2 bg-white rounded">
+                        <img src="/media/b-logo.jpg" width="300px" height="160px" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h6 class="card-title text-info">{{video.title}}</h6>
+                            <h5 class="badge badge-warning p-2">{{video.category|title}}</h5>  <!-- 'title' is used to capitalize the text (category name) -->
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+
+        {% else %}
+            <div class="row row-cols-2 row-cols-md-4">
+                {% for video in posts %}
+                    <div class="col my-2">
+                        <div class="card h-100 shadow pb-2 mb-2 bg-white rounded">
+                            <img src="/media/b-logo.jpg" width="300px" height="160px" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h6 class="card-title text-info">{{video.title}}</h6>
+                                <h5 class="badge badge-warning p-2">{{video.category|title}}</h5>  <!-- 'title' is used to capitalize the text (category name) -->
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+    {% endif %}
+
+{% endblock %}
