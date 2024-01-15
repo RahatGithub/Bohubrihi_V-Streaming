@@ -1,0 +1,46 @@
+{% extends 'navbar.html' %}
+{% load crispy_forms_tags %} 
+{% block title_block %} {{title}} {% endblock %}
+
+{% block body_block%}
+
+    <div class="m-2">
+        <iframe
+            width="1000px"
+            height="500px"
+            src="{{post.video_link}}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+        <div>
+            <small><h4 class="text-info">{{post.category|title}}</h4></small>  <!-- 'title' is used to capitalize the text (category name) -->
+            <h3>{{post.title}}</h3>
+        </div>
+    </div>
+
+    <div class="m-2">
+        <form method="POST">
+            {{form|crispy}}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary"> Send </button> 
+        </form>
+    </div> 
+
+    <h4>Comments:</h4>
+    {% if comments %}
+        <div class="container p-3  bg-light border rounded">
+            {% for comment in comments %}
+                <div class="row px-3 my-2">
+                    <div class="col-1">
+                        <a class="nav-link" href="#"><img src="/media/profile_pic/default_user.png" height="40px" width="40px" class="rounded-circle"></a>
+                    </div>
+                    <div class="col-11">
+                        <div class="row"><h6>{{comment.user}}</h6></div>
+                        <div class="row"><p>{{comment.comment}}</p></div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

@@ -14,7 +14,7 @@ def sign_up(request):
             user = form.save()
             user_profile = UserProfile(user=user)
             user_profile.save() 
-            return HttpResponseRedirect(reverse('App_Accounts:login'))  # change it to 'App_Post:home', also pass user info when logged in 
+            return HttpResponseRedirect(reverse('App_Accounts:log_in'))  # change it to 'App_Post:home', also pass user info when logged in 
     
     context={ 'title':'Sign up . V-Stream', 'form' : form }
 
